@@ -1,0 +1,377 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+   <div class="signup-box">
+    <h2>회원가입</h2>
+
+    <h4>회원가입하고 적립금 꼭 받아가세요!</h4> <!-- 본글씨보다 작게-->
+
+
+<!-- ID와 pw를 작성하는 장소 지정
+
+    <input type="text" name="name" placeholder="이름">
+    <br><!---줄바꿈-->
+<!--    <input type="text" id="id" placeholder="아이디">
+    <br>
+    <input type="text" pw="passward" placeholder="비밀번호">
+    <br>
+    <input type="text" mail="mail" placeholder="이메일">
+    <br>
+   <button onclick="join()">회원가입하기</button>
+    </div>
+
+   <script>
+    function join(){
+        const id=document.getElementById("Id").value;
+    
+   if(!id || !email || !pw || !pwCheck || !name) {
+    alert("모든 항목을 입력해주세요");
+    return;
+   }
+
+    if(pw !== pwCheck) {
+    alert("비밀번호가 일치하지 않습니다");
+    return;
+   }
+}
+   
+
+ 
+    </script>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html
+-->
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원가입</title>
+
+  <style>
+
+
+
+
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 30px 15px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 430px;
+      background: white;
+      padding: 40px 35px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      height: 45px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 0 12px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #666;
+    }
+
+    .message {
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    .terms {
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+      margin-top: 25px;
+    }
+
+    .terms h3 {
+      font-size: 15px;
+      margin-bottom: 15px;
+    }
+
+    .terms label {
+      display: flex;
+      align-items: center;
+      font-weight: normal;
+      font-size: 13px;
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+
+    .terms input {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+    }
+
+    button {
+      width: 100%;
+      height: 48px;
+      border: none;
+      border-radius: 6px;
+      background: #333;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background: #555;
+    }
+
+    .success {
+      text-align: center;
+      color: #16834a;
+      margin-top: 18px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>회원가입</h1>
+    <p class="subtitle">회원가입을 통해 다양한 서비스를 이용해 보세요.</p>
+
+    <form id="signupForm">
+
+      <div class="form-group">
+        <label for="userId">아이디</label>
+        <input type="text" id="userId"
+          placeholder="아이디를 입력하세요">
+      </div>
+
+      <div class="form-group">
+        <label for="password">비밀번호</label>
+        <input type="password" id="password"
+          placeholder="비밀번호를 입력하세요">
+      </div>
+
+      <div class="form-group">
+        <label for="passwordCheck">비밀번호 확인</label>
+        <input type="password" id="passwordCheck"
+          placeholder="비밀번호를 다시 입력하세요">
+        <p id="passwordMessage" class="message"></p>
+      </div>
+
+      <div class="form-group">
+        <label for="name">이름</label>
+        <input type="text" id="name"
+          placeholder="이름을 입력하세요">
+      </div>
+
+      <div class="form-group">
+        <label for="email">이메일</label>
+        <input type="email" id="email"
+          placeholder="example@email.com">
+      </div>
+
+      <div class="terms">
+        <h3>약관 동의</h3>
+
+        <label>
+          <input type="checkbox" id="allAgree">
+          전체 동의
+        </label>
+
+        <label>
+          <input type="checkbox" class="required">
+          이용약관 동의 (필수)
+        </label>
+
+        <label>
+          <input type="checkbox" class="required">
+          개인정보 수집 및 이용 동의 (필수)
+        </label>
+
+        <label>
+          <input type="checkbox">
+          마케팅 정보 수신 동의 (선택)
+        </label>
+      </div>
+
+      <button type="submit">회원가입</button>
+
+      <p id="result" class="success"></p>
+
+    </form>
+  </div>
+
+  <script>
+    // 전체 동의 기능
+    const allAgree = document.getElementById("allAgree");
+    const checkboxes = document.querySelectorAll(".terms input:not(#allAgree)");
+
+    allAgree.addEventListener("change", function() {
+      checkboxes.forEach(function(checkbox) {
+        checkbox.checked = allAgree.checked;
+      });
+    });
+
+    // 개별 약관 변경 시 전체 동의 체크 상태 변경
+    checkboxes.forEach(function(checkbox) {
+      checkbox.addEventListener("change", function() {
+        allAgree.checked = Array.from(checkboxes)
+          .every(function(item) {
+            return item.checked;
+          });
+      });
+    });
+
+    // 비밀번호 일치 확인
+    const password = document.getElementById("password");
+    const passwordCheck = document.getElementById("passwordCheck");
+    const passwordMessage = document.getElementById("passwordMessage");
+
+    function checkPassword() {
+      if (!passwordCheck.value) {
+        passwordMessage.textContent = "";
+        return false;
+      }
+
+      if (password.value === passwordCheck.value) {
+        passwordMessage.textContent = "비밀번호가 일치합니다.";
+        passwordMessage.style.color = "green";
+        return true;
+      } else {
+        passwordMessage.textContent = "비밀번호가 일치하지 않습니다.";
+        passwordMessage.style.color = "red";
+        return false;
+      }
+    }
+
+    password.addEventListener("input", checkPassword);
+    passwordCheck.addEventListener("input", checkPassword);
+
+    // 회원가입 제출
+    document.getElementById("signupForm")
+      .addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+      const userId = document.getElementById("userId").value.trim();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+
+      const result = document.getElementById("result");
+
+      result.style.color = "red";
+
+      if (userId.length < 4) {
+        result.textContent = "아이디는 4자 이상 입력해 주세요.";
+        return;
+      }
+
+      if (password.value.length < 8) {
+        result.textContent = "비밀번호는 8자 이상 입력해 주세요.";
+        return;
+      }
+
+      if (!checkPassword()) {
+        result.textContent = "비밀번호를 확인해 주세요.";
+        return;
+      }
+
+      if (!name) {
+        result.textContent = "이름을 입력해 주세요.";
+        return;
+      }
+
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailPattern.test(email)) {
+        result.textContent = "올바른 이메일 주소를 입력해 주세요.";
+        return;
+      }
+
+      const requiredTerms = document.querySelectorAll(".required");
+
+      const allRequiredChecked = Array.from(requiredTerms)
+        .every(function(item) {
+          return item.checked;
+        });
+
+      if (!allRequiredChecked) {
+        result.textContent = "필수 약관에 동의해 주세요.";
+        return;
+      }
+
+      result.style.color = "green";
+      result.textContent = name + "님, 회원가입 입력이 완료되었습니다~";
+    });
+  </script>
+
+</body>
+</html>
