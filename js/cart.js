@@ -12,7 +12,7 @@ function showBooks() {
 
   for (var i = 0; i < books.length; i++) {
     var book = books[i];
-    var text = (book.title + " " + book.category).toLowerCase();
+    var text = (book.title + " " + book.category + " " + book.author + " " + book.publisher + " " + book.summary).toLowerCase();
 
     if (currentCat !== "전체" && book.category !== currentCat) continue;
     if (key !== "" && text.indexOf(key) === -1) continue;
@@ -21,9 +21,12 @@ function showBooks() {
     html += "<div class='book " + book.color + "'><strong>" + book.category + "</strong></div>";
     html += "<p class='cat'>" + book.category + "</p>";
     html += "<h3>" + book.title + "</h3>";
-    html += "<p class='price'>" + won(book.price) + "</p>";
+    html += "<p class='muted'>" + book.author + " · " + book.publisher + "</p>";
+    html += "<p class='desc'>" + book.summary + "</p>";
+    html += "<p class='price'>정가 " + won(book.price) + "</p>";
     html += "<p>수량 <input id='qty-" + book.id + "' type='number' min='1' max='99' value='1'></p>";
     html += "<button type='button' class='btn btn-primary btn-block' onclick=\"putBook('" + book.id + "')\">장바구니 담기</button>";
+    html += "<a class='btn btn-ghost btn-block buy-link' href='" + book.url + "' target='_blank' rel='noopener noreferrer'>" + book.shop + "에서 보기</a>";
     html += "</article>";
   }
 
@@ -94,6 +97,9 @@ function showCart() {
     html += "<div class='ci-info'>";
     html += "<p class='cat'>" + item.category + "</p>";
     html += "<p class='item-title'>" + item.title + "</p>";
+    if (item.url) {
+      html += "<p><a class='store-link' href='" + item.url + "' target='_blank' rel='noopener noreferrer'>" + (item.shop || "판매 페이지") + "에서 보기</a></p>";
+    }
     html += "<p class='muted'>권당 " + won(item.price) + "</p>";
     html += "</div>";
     html += "<div><span class='qty-label'>수량</span><div class='qty'>";
