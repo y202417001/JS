@@ -9,6 +9,7 @@ if (!keyword) keyword = "";
 function showBooks() {
   var html = "";
   var key = keyword.toLowerCase();
+  var shown = {};
 
   for (var i = 0; i < books.length; i++) {
     var book = books[i];
@@ -16,14 +17,21 @@ function showBooks() {
 
     if (currentCat !== "전체" && book.category !== currentCat) continue;
     if (key !== "" && text.indexOf(key) === -1) continue;
+    if (!shown[book.category]) shown[book.category] = 0;
+    if (shown[book.category] >= 5) continue;
+    shown[book.category]++;
 
     html += "<article class='product'>";
-    html += "<div class='book " + book.color + "'><strong>" + book.category + "</strong></div>";
+    html += "<img class='cover' src='" + book.image + "' alt='" + book.title + "'>";
     html += "<p class='cat'>" + book.category + "</p>";
     html += "<h3>" + book.title + "</h3>";
     html += "<p class='muted'>" + book.author + " · " + book.publisher + "</p>";
     html += "<p class='desc'>" + book.summary + "</p>";
-    html += "<p class='price'>정가 " + won(book.price) + "</p>";
+    html += "<p class='price'>" + book.shop + " " + won(book.price);
+    if (book.listPrice && book.listPrice !== book.price) {
+      html += " <span class='list-price'>정가 " + won(book.listPrice) + "</span>";
+    }
+    html += "</p>";
     html += "<p>수량 <input id='qty-" + book.id + "' type='number' min='1' max='99' value='1'></p>";
     html += "<button type='button' class='btn btn-primary btn-block' onclick=\"putBook('" + book.id + "')\">장바구니 담기</button>";
     html += "<a class='btn btn-ghost btn-block buy-link' href='" + book.url + "' target='_blank' rel='noopener noreferrer'>" + book.shop + "에서 보기</a>";
@@ -93,7 +101,11 @@ function showCart() {
     sum = sum + line;
 
     html += "<div class='cart-item'>";
-    html += "<div class='book small " + item.color + "'><strong>" + item.category + "</strong></div>";
+    if (item.image) {
+      html += "<img class='cover small' src='" + item.image + "' alt=''>";
+    } else {
+      html += "<div class='book small " + item.color + "'><strong>" + item.category + "</strong></div>";
+    }
     html += "<div class='ci-info'>";
     html += "<p class='cat'>" + item.category + "</p>";
     html += "<p class='item-title'>" + item.title + "</p>";
