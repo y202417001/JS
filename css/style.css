@@ -619,7 +619,31 @@ input[type="checkbox"] {
   line-height: 1.55;
 }
 
+.cover {
+  width: 132px;
+  height: 184px;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border-radius: 2px;
+  background: #f3f3f3;
+  box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.16);
+}
+
+.cover.small {
+  width: 64px;
+  height: 90px;
+  margin: 0;
+}
+
 .price { margin: 0 0 10px; font-size: 18px; font-weight: 800; }
+
+.list-price {
+  margin-left: 6px;
+  color: var(--sub);
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: line-through;
+}
 
 .product .qty-row { margin-bottom: 12px; }
 
