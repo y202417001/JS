@@ -1,3 +1,4 @@
+
 showHeader();
 
 var pageSearch = new URLSearchParams(location.search);
@@ -9,30 +10,51 @@ if (!keyword) keyword = "";
 function showBooks() {
   var html = "";
   var key = keyword.toLowerCase();
+  var shown = {};
+  var found = 0;
 
   for (var i = 0; i < books.length; i++) {
     var book = books[i];
-    var text = (book.title + " " + book.category).toLowerCase();
+    var text = (book.title + " " + book.category + " " + book.author + " " + book.publisher + " " + book.summary).toLowerCase();
 
     if (currentCat !== "전체" && book.category !== currentCat) continue;
     if (key !== "" && text.indexOf(key) === -1) continue;
+    if (!shown[book.category]) shown[book.category] = 0;
+    if (shown[book.category] >= 5) continue;
+    shown[book.category]++;
+    found++;
 
     html += "<article class='product'>";
-    html += "<div class='book " + book.color + "'><strong>" + book.category + "</strong></div>";
+    html += "<img class='cover' src='" + book.image + "' alt='" + book.title + "'>";
     html += "<p class='cat'>" + book.category + "</p>";
     html += "<h3>" + book.title + "</h3>";
-    html += "<p class='price'>" + won(book.price) + "</p>";
+    html += "<p class='muted'>" + book.author + " · " + book.publisher + "</p>";
+    html += "<p class='desc'>" + book.summary + "</p>";
+    html += "<p class='price'>" + book.shop + " " + won(book.price);
+    if (book.listPrice && book.listPrice !== book.price) {
+      html += " <span class='list-price'>정가 " + won(book.listPrice) + "</span>";
+    }
+    html += "</p>";
     html += "<p>수량 <input id='qty-" + book.id + "' type='number' min='1' max='99' value='1'></p>";
     html += "<button type='button' class='btn btn-primary btn-block' onclick=\"putBook('" + book.id + "')\">장바구니 담기</button>";
+    html += "<a class='btn btn-ghost btn-block buy-link' href='" + book.url + "' target='_blank' rel='noopener noreferrer'>" + book.shop + "에서 보기</a>";
     html += "</article>";
   }
 
   if (html === "") html = "<div class='empty'><p>조건에 맞는 도서가 없습니다.</p></div>";
   document.getElementById("book-list").innerHTML = html;
 
+  var searchInputs = document.getElementsByName("q");
+  for (var s = 0; s < searchInputs.length; s++) searchInputs[s].value = keyword;
+
   var title = "자격증 도서 담기";
   if (currentCat !== "전체") title = currentCat + " 관련 도서";
-  if (keyword !== "") title = keyword + " 검색 결과";
+  if (keyword !== "") {
+    title = "‘" + keyword + "’ 검색 결과 " + found + "권";
+    if (currentCat !== "전체") title = currentCat + " · " + title;
+    if (found === 0) document.getElementById("message").textContent = "‘" + keyword + "’에 맞는 도서가 없습니다.";
+    else document.getElementById("message").textContent = found + "권을 찾았습니다. 아래 도서 목록을 확인해 주세요.";
+  }
   document.getElementById("book-title").textContent = title;
 
   var chips = document.getElementsByClassName("chip");
@@ -90,10 +112,17 @@ function showCart() {
     sum = sum + line;
 
     html += "<div class='cart-item'>";
-    html += "<div class='book small " + item.color + "'><strong>" + item.category + "</strong></div>";
+    if (item.image) {
+      html += "<img class='cover small' src='" + item.image + "' alt=''>";
+    } else {
+      html += "<div class='book small " + item.color + "'><strong>" + item.category + "</strong></div>";
+    }
     html += "<div class='ci-info'>";
     html += "<p class='cat'>" + item.category + "</p>";
     html += "<p class='item-title'>" + item.title + "</p>";
+    if (item.url) {
+      html += "<p><a class='store-link' href='" + item.url + "' target='_blank' rel='noopener noreferrer'>" + (item.shop || "판매 페이지") + "에서 보기</a></p>";
+    }
     html += "<p class='muted'>권당 " + won(item.price) + "</p>";
     html += "</div>";
     html += "<div><span class='qty-label'>수량</span><div class='qty'>";
