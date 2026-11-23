@@ -587,7 +587,7 @@ input[type="checkbox"] {
 
 .catalog-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 14px;
 }
 
@@ -603,13 +603,20 @@ input[type="checkbox"] {
 
 .product h3 {
   display: -webkit-box;
-  min-height: 2.8em;
+  min-height: 4.2em;
   margin: 6px 0;
   overflow: hidden;
   font-size: 15px;
   line-height: 1.4;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
+}
+
+.desc {
+  margin: 0 0 10px;
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.55;
 }
 
 .price { margin: 0 0 10px; font-size: 18px; font-weight: 800; }
@@ -617,6 +624,18 @@ input[type="checkbox"] {
 .product .qty-row { margin-bottom: 12px; }
 
 .product .btn { margin-top: auto; }
+
+.buy-link {
+  margin-top: 8px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.store-link {
+  color: var(--green-dark);
+  font-size: 13px;
+  font-weight: 700;
+}
 
 .book {
   position: relative;
